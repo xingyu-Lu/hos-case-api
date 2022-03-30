@@ -43,5 +43,14 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
 
         // 更新日志
         Route::get('updatelogs/index', 'UpdateLogsController@index')->name('updatelogs.index');
+
+        //文件下载
+        Route::get('files/down', 'FilesController@down')->name('files.down');
+        //文件上传
+        Route::post('files/upload', 'FilesController@upload')->name('files.upload');
+
+        // 病例管理
+        Route::put('cases/status', 'CasesController@status')->name('cases.status');
+        Route::apiResource('cases', 'CasesController');
     });
 });

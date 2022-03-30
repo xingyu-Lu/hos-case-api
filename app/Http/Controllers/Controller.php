@@ -19,7 +19,7 @@ class Controller extends BaseController
             'success' => true,
         ];
 
-        if (!empty($data->total())) {
+        if (!empty($data->perPage())) {
             $res_data['pagination'] = [
                 'count' => $data->count(),
                 'current_page' => $data->currentPage(),
