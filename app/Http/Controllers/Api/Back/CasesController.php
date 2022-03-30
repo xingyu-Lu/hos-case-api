@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\CaseReport;
+use App\Models\Role;
 use App\Models\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,19 @@ class CasesController extends Controller
      */
     public function index()
     {
-        $cases = CaseReport::orderBy('id', 'desc')->paginate(20);
+        $current_user = auth('api')->user();
+
+        $root = $current_user->hasRole(Role::ROOT, app(Admin::class)->guardName());
+        
+        $where = [];
+
+        if (!$root) {
+            $where[] = [
+                'admin_id', '=', $current_user['id']
+            ];
+        }
+
+        $cases = CaseReport::where($where)->orderBy('id', 'desc')->paginate(20);
 
         foreach ($cases as $key => $value) {
             $value['abstract'] = mb_substr($value['abstract'], 0, 30) . '...';

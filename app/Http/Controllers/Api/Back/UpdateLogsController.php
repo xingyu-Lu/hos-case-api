@@ -16,7 +16,7 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
-                'content' => '部署阿里云服务器',
+                'content' => '部署阿里云服务器，病例模块',
                 'timestamp' => '2022-03-30',
             ],
             [
