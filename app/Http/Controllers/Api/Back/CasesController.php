@@ -35,6 +35,9 @@ class CasesController extends Controller
 
         foreach ($cases as $key => $value) {
             $value['abstract'] = mb_substr($value['abstract'], 0, 30) . '...';
+            $value['diagnosis'] = mb_substr($value['diagnosis'], 0, 30) . '...';
+            $value['diagnosis_result'] = mb_substr($value['diagnosis_result'], 0, 30) . '...';
+            $value['general_seen'] = mb_substr($value['general_seen'], 0, 30) . '...';
 
             $img = UploadFile::find($value['img_id']);
             $url = '';
