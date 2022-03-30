@@ -18,7 +18,6 @@ use App\Exceptions\BaseException;
 Route::namespace('Api\Back')->prefix('back')->group(function () {
     // 获取 token
     Route::post('authorizations', 'AuthorizationsController@store')->name('login');
-    Route::apiResource('admins', 'AdminsController');
 
     // 需要 token 验证的接口
     Route::middleware(['auth:api', 'permission'])->name('api.back.')->group(function () {
@@ -35,7 +34,7 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         // 管理员
         Route::put('admins/changepwd', 'AdminsController@changepwd')->name('admins.changepwd');
         Route::put('admins/status', 'AdminsController@status')->name('admins.status');
-        // Route::apiResource('admins', 'AdminsController');
+        Route::apiResource('admins', 'AdminsController');
 
         // 菜单
         Route::put('menus/status', 'MenusController@status')->name('menus.status');
