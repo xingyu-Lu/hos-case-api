@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Back;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\CaseReport;
 use App\Models\Role;
 use App\Models\UploadFile;
