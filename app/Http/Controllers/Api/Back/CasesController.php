@@ -41,7 +41,7 @@ class CasesController extends Controller
             $value['general_seen'] = mb_substr($value['general_seen'], 0, 30) . '...';
 
             $case_type = CaseType::find($value['type_id']);
-            $value['type_name'] = $case_type['name'];
+            $value['type_name'] = $case_type['name'] ?? '';
 
             $img = UploadFile::find($value['img_id']);
             $url = '';
@@ -99,7 +99,7 @@ class CasesController extends Controller
 
         $case_type = CaseType::find($case['type_id']);
 
-        $case['type_name'] = $case_type['name'];
+        $case['type_name'] = $case_type['name'] ?? '';
 
         $img = UploadFile::find($case['img_id']);
         $img_url = '';
