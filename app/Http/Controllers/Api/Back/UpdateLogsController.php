@@ -16,7 +16,11 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
-                'content' => '部署阿里云服务器，病例模块',
+                'content' => '新增病例类型，添加修改预览病例修改等等',
+                'timestamp' => '2022-03-31',
+            ],
+            [
+                'content' => '部署阿里云服务器，病例模块等等',
                 'timestamp' => '2022-03-30',
             ],
             [
