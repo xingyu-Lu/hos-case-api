@@ -57,7 +57,7 @@ CREATE TABLE `syy_cases` (
   `age` int(11) NOT NULL DEFAULT 0 COMMENT '病员年龄',
   `sex` tinyint(3) NOT NULL DEFAULT 0 COMMENT '性别 0：男 1：女',
   `abstract` varchar(800) NOT NULL DEFAULT '' COMMENT '病史摘要',
-  `type` varchar(100) NOT NULL DEFAULT '' COMMENT '病例类型',
+  `type_id` int(11) NOT NULL DEFAULT 0 COMMENT '病例类型id',
   `part` varchar(100) NOT NULL DEFAULT '' COMMENT '部位',
   `diagnosis` varchar(300) NOT NULL DEFAULT '' COMMENT '临床诊断',
   `diagnosis_result` varchar(300) NOT NULL DEFAULT '' COMMENT '诊断结果',
@@ -70,3 +70,12 @@ CREATE TABLE `syy_cases` (
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='病例表';
+
+DROP TABLE IF EXISTS `syy_case_types`;
+CREATE TABLE `syy_case_types` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '类型名',
+  `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='病例类型表';

@@ -52,5 +52,8 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         // 病例管理
         Route::put('cases/status', 'CasesController@status')->name('cases.status');
         Route::apiResource('cases', 'CasesController');
+
+        // 病例类型管理
+        Route::apiResource('caseTypes', 'CaseTypesController');
     });
 });

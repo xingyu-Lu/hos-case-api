@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Back;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\CaseReport;
+use App\Models\CaseType;
 use App\Models\Role;
 use App\Models\UploadFile;
 use Illuminate\Http\Request;
@@ -39,6 +40,9 @@ class CasesController extends Controller
             $value['diagnosis_result'] = mb_substr($value['diagnosis_result'], 0, 30) . '...';
             $value['general_seen'] = mb_substr($value['general_seen'], 0, 30) . '...';
 
+            $case_type = CaseType::find($value['type_id']);
+            $value['type_name'] = $case_type['name'];
+
             $img = UploadFile::find($value['img_id']);
             $url = '';
             if ($img) {
@@ -68,7 +72,7 @@ class CasesController extends Controller
             'age' => $params['age'],
             'sex' => $params['sex'],
             'abstract' => $params['abstract'],
-            'type' => $params['type'],
+            'type_id' => $params['type_id'],
             'part' => $params['part'],
             'diagnosis' => $params['diagnosis'] ?? '',
             'diagnosis_result' => $params['diagnosis_result'] ?? '',
@@ -92,6 +96,10 @@ class CasesController extends Controller
     public function show($id)
     {
         $case = CaseReport::find($id);
+
+        $case_type = CaseType::find($case['type_id']);
+
+        $case['type_name'] = $case_type['name'];
 
         $img = UploadFile::find($case['img_id']);
         $img_url = '';
@@ -144,7 +152,7 @@ class CasesController extends Controller
             'age' => $params['age'],
             'sex' => $params['sex'],
             'abstract' => $params['abstract'],
-            'type' => $params['type'],
+            'type_id' => $params['type_id'],
             'part' => $params['part'],
             'diagnosis' => $params['diagnosis'] ?? '',
             'diagnosis_result' => $params['diagnosis_result'] ?? '',
