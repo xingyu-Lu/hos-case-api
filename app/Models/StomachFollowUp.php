@@ -18,10 +18,8 @@ class StomachFollowUp extends BaseModel
     protected $guarded = [];
 
     protected $casts = [
-        'admission_time' => 'datetime:Y-m-d H:i:s',
-        'operative_time' => 'datetime:Y-m-d H:i:s',
-        'discharge_time' => 'datetime:Y-m-d H:i:s',
         'dead_time' => 'datetime:Y-m-d H:i:s',
+        'followed_up_after_operation_date_time' => 'datetime:Y-m-d H:i:s',
         'gallstone_discovery_time' => 'datetime:Y-m-d H:i:s',
         'local_recurrence_time' => 'datetime:Y-m-d H:i:s',
         'distant_transfer_time' => 'datetime:Y-m-d H:i:s',

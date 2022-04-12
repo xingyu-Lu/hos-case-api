@@ -57,6 +57,8 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         Route::apiResource('caseTypes', 'CaseTypesController');
 
         // 胃ca
-        Route::apiResource('stomachCas', 'StomachCasController');        
+        Route::apiResource('stomachCas', 'StomachCasController');
+        // 胃ca随访
+        Route::apiResource('stomachFollowUps', 'StomachFollowUpsController');        
     });
 });
