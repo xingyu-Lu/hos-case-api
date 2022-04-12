@@ -16,6 +16,26 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
+                'content' => '胃ca前后联调，问题处理等等',
+                'timestamp' => '2022-04-12',
+            ],
+            [
+                'content' => '胃ca页面编写，后端接口编写等等',
+                'timestamp' => '2022-04-11',
+            ],
+            [
+                'content' => '胃ca建表，后端接口开始等等',
+                'timestamp' => '2022-04-08',
+            ],
+            [
+                'content' => '需求分析，胃ca建表等等',
+                'timestamp' => '2022-04-07',
+            ],
+            [
+                'content' => '病例需求了解等等',
+                'timestamp' => '2022-04-06',
+            ],
+            [
                 'content' => '新增病例类型，添加修改预览病例修改等等',
                 'timestamp' => '2022-03-31',
             ],

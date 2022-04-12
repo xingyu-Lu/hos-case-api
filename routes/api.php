@@ -20,7 +20,7 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
     Route::post('authorizations', 'AuthorizationsController@store')->name('login');
 
     // 需要 token 验证的接口
-    Route::middleware(['auth:api', 'permission'])->name('api.back.')->group(function () {
+    Route::middleware(['auth:api', 'permission', 'filter.empty.string'])->name('api.back.')->group(function () {
         // 角色管理
         Route::apiResource('roles', 'RolesController');
 
@@ -55,5 +55,8 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
 
         // 病例类型管理
         Route::apiResource('caseTypes', 'CaseTypesController');
+
+        // 胃ca
+        Route::apiResource('stomachCas', 'StomachCasController');        
     });
 });

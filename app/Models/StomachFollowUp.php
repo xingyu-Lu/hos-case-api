@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class StomachFollowUp extends BaseModel
+{
+    use HasFactory;
+
+    protected $table = 'stomach_follow_ups';
+
+    protected $dateFormat = 'U';
+
+    //均可批量赋值
+    protected $guarded = [];
+
+    protected $casts = [
+        'admission_time' => 'datetime:Y-m-d H:i:s',
+        'operative_time' => 'datetime:Y-m-d H:i:s',
+        'discharge_time' => 'datetime:Y-m-d H:i:s',
+        'dead_time' => 'datetime:Y-m-d H:i:s',
+        'gallstone_discovery_time' => 'datetime:Y-m-d H:i:s',
+        'local_recurrence_time' => 'datetime:Y-m-d H:i:s',
+        'distant_transfer_time' => 'datetime:Y-m-d H:i:s',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+}
