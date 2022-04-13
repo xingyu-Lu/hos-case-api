@@ -59,6 +59,29 @@ class StomachCasController extends Controller
         $params['attachment_id'] = $params['attachment'] ?? '';
         unset($params['attachment']);
 
+
+        if (isset($params['main_symptoms'])) {
+            $params['main_symptoms'] = implode(',', $params['main_symptoms']);
+        }
+        if (isset($params['main_signs'])) {
+            $params['main_signs'] = implode(',', $params['main_signs']);   
+        }
+        if (isset($params['preoperative_complications'])) {
+            $params['preoperative_complications'] = implode(',', $params['preoperative_complications']);
+        }
+        if (isset($params['simultaneous_organoectomy_resection'])) {
+            $params['simultaneous_organoectomy_resection'] = implode(',', $params['simultaneous_organoectomy_resection']);
+        }
+        if (isset($params['intraoperative_organ_injury_occurred'])) {
+            $params['intraoperative_organ_injury_occurred'] = implode(',', $params['intraoperative_organ_injury_occurred']);
+        }
+        if (isset($params['adjacent_structures_are_infiltrated_directly'])) {
+            $params['adjacent_structures_are_infiltrated_directly'] = implode(',', $params['adjacent_structures_are_infiltrated_directly']);
+        }
+        if (isset($params['perioperative_complications'])) {
+            $params['perioperative_complications'] = implode(',', $params['perioperative_complications']);
+        }
+
         if (isset($params['laparoscopic_exploration_time']) && $params['laparoscopic_exploration_time']) {
             $params['laparoscopic_exploration_time'] = strtotime($params['laparoscopic_exploration_time']);
         }
@@ -179,6 +202,14 @@ class StomachCasController extends Controller
         }
         $stomach_ca['attachment'] = $attachment;   
 
+        $stomach_ca['main_symptoms'] = explode(',', $stomach_ca['main_symptoms']);
+        $stomach_ca['main_signs'] = explode(',', $stomach_ca['main_signs']);   
+        $stomach_ca['preoperative_complications'] = explode(',', $stomach_ca['preoperative_complications']);     
+        $stomach_ca['simultaneous_organoectomy_resection'] = explode(',', $stomach_ca['simultaneous_organoectomy_resection']);
+        $stomach_ca['intraoperative_organ_injury_occurred'] = explode(',', $stomach_ca['intraoperative_organ_injury_occurred']);
+        $stomach_ca['adjacent_structures_are_infiltrated_directly'] = explode(',', $stomach_ca['adjacent_structures_are_infiltrated_directly']);
+        $stomach_ca['perioperative_complications'] = explode(',', $stomach_ca['perioperative_complications']);
+
         return response()->json($this->response_data($stomach_ca));
     }
 
@@ -201,6 +232,28 @@ class StomachCasController extends Controller
 
         $params['attachment_id'] = $params['attachment'] ?? '';
         unset($params['attachment']);
+
+        if (isset($params['main_symptoms'])) {
+            $params['main_symptoms'] = implode(',', $params['main_symptoms']);
+        }
+        if (isset($params['main_signs'])) {
+            $params['main_signs'] = implode(',', $params['main_signs']);   
+        }
+        if (isset($params['preoperative_complications'])) {
+            $params['preoperative_complications'] = implode(',', $params['preoperative_complications']);
+        }
+        if (isset($params['simultaneous_organoectomy_resection'])) {
+            $params['simultaneous_organoectomy_resection'] = implode(',', $params['simultaneous_organoectomy_resection']);
+        }
+        if (isset($params['intraoperative_organ_injury_occurred'])) {
+            $params['intraoperative_organ_injury_occurred'] = implode(',', $params['intraoperative_organ_injury_occurred']);
+        }
+        if (isset($params['adjacent_structures_are_infiltrated_directly'])) {
+            $params['adjacent_structures_are_infiltrated_directly'] = implode(',', $params['adjacent_structures_are_infiltrated_directly']);
+        }
+        if (isset($params['perioperative_complications'])) {
+            $params['perioperative_complications'] = implode(',', $params['perioperative_complications']);
+        }
 
         if (isset($params['laparoscopic_exploration_time']) && $params['laparoscopic_exploration_time']) {
             $params['laparoscopic_exploration_time'] = strtotime($params['laparoscopic_exploration_time']);

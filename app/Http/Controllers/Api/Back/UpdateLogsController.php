@@ -16,6 +16,10 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
+                'content' => '胃ca加随访，部分单选框字段改为复选框等等',
+                'timestamp' => '2022-04-13',
+            ],
+            [
                 'content' => '胃ca前后联调，问题处理等等',
                 'timestamp' => '2022-04-12',
             ],
