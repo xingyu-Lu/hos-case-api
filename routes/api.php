@@ -60,5 +60,10 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         Route::apiResource('stomachCas', 'StomachCasController');
         // 胃ca随访
         Route::apiResource('stomachFollowUps', 'StomachFollowUpsController');        
+
+        // 间质瘤
+        Route::apiResource('StromalTumors', 'StromalTumorsController');
+        // 间质瘤随访
+        Route::apiResource('StromalTumorFollowUps', 'StromalTumorFollowUpsController');        
     });
 });

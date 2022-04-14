@@ -6,11 +6,11 @@ use App\Exceptions\BaseException;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Role;
-use App\Models\StomachCa;
-use App\Models\StomachFollowUp;
+use App\Models\StromalTumor;
+use App\Models\StromalTumorFollowUp;
 use Illuminate\Http\Request;
 
-class StomachFollowUpsController extends Controller
+class StromalTumorFollowUpsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,15 +33,15 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($params['stromal_tumor_id']);
+        $stromal_tumor = StromalTumor::where($where)->find($params['stromal_tumor_id']);
 
-        if (!$stomach_ca) {
+        if (!$stromal_tumor) {
             throw new BaseException(['msg' => '非法操作']);
         }
 
-        $stomach_follow_up = StomachFollowUp::where('stromal_tumor_id', $params['stromal_tumor_id'])->orderBy('id', 'desc')->paginate(20);
+        $stromal_tumor_follow_up = StromalTumorFollowUp::where('stromal_tumor_id', $params['stromal_tumor_id'])->orderBy('id', 'desc')->paginate(20);
 
-        return response()->json($this->response_page($stomach_follow_up));
+        return response()->json($this->response_page($stromal_tumor_follow_up));
     }
 
     /**
@@ -66,9 +66,9 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($params['stromal_tumor_id']);
+        $stromal_tumor = StromalTumor::where($where)->find($params['stromal_tumor_id']);
 
-        if (!$stomach_ca) {
+        if (!$stromal_tumor) {
             throw new BaseException(['msg' => '非法操作']);
         }
 
@@ -88,7 +88,7 @@ class StomachFollowUpsController extends Controller
             $params['distant_transfer_time'] = strtotime($params['distant_transfer_time']);
         }
 
-        StomachFollowUp::create($params);
+        StromalTumorFollowUp::create($params);
 
         return response()->json($this->response_data());
     }
@@ -101,9 +101,9 @@ class StomachFollowUpsController extends Controller
      */
     public function show($id)
     {
-        $stomach_follow_up = StomachFollowUp::find($id);
+        $stromal_tumor_follow_up = StromalTumorFollowUp::find($id);
 
-        return response()->json($this->response_data($stomach_follow_up));
+        return response()->json($this->response_data($stromal_tumor_follow_up));
     }
 
     /**
@@ -115,9 +115,9 @@ class StomachFollowUpsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $stomach_follow_up = StomachFollowUp::find($id);
+        $stromal_tumor_follow_up = StromalTumorFollowUp::find($id);
 
-        if (!$stomach_follow_up) {
+        if (!$stromal_tumor_follow_up) {
             throw new BaseException(['msg' => '记录不存在']);
         }
 
@@ -135,9 +135,9 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($stomach_follow_up['stromal_tumor_id']);
+        $stromal_tumor = StromalTumor::where($where)->find($stromal_tumor_follow_up['stromal_tumor_id']);
 
-        if (!$stomach_ca) {
+        if (!$stromal_tumor) {
             throw new BaseException(['msg' => '非法操作']);
         }
 
@@ -157,7 +157,7 @@ class StomachFollowUpsController extends Controller
             $params['distant_transfer_time'] = strtotime($params['distant_transfer_time']);
         }
 
-        StomachFollowUp::updateOrCreate(['id' => $id], $params);
+        StromalTumorFollowUp::updateOrCreate(['id' => $id], $params);
 
         return response()->json($this->response_data());
     }

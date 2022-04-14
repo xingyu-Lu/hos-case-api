@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api\Back;
 
+use App\Exceptions\BaseException;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Role;
-use App\Models\StomachCa;
+use App\Models\StromalTumor;
 use App\Models\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class StomachCasController extends Controller
+class StromalTumorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -43,7 +44,7 @@ class StomachCasController extends Controller
             $where[] = ['hospital_number', '=' . $params['hospital_number']];
         }
 
-        $stomach_ca = StomachCa::where($where)->orderBy('id', 'desc')->paginate(20);
+        $stomach_ca = StromalTumor::where($where)->orderBy('id', 'desc')->paginate(20);
 
         return response()->json($this->response_page($stomach_ca));
     }
@@ -78,17 +79,17 @@ class StomachCasController extends Controller
         if (isset($params['main_signs'])) {
             $params['main_signs'] = implode(',', $params['main_signs']);   
         }
+        if (isset($params['preoperative_complications_0'])) {
+            $params['preoperative_complications_0'] = implode(',', $params['preoperative_complications_0']);
+        }
         if (isset($params['preoperative_complications'])) {
             $params['preoperative_complications'] = implode(',', $params['preoperative_complications']);
-        }
-        if (isset($params['simultaneous_organoectomy_resection'])) {
-            $params['simultaneous_organoectomy_resection'] = implode(',', $params['simultaneous_organoectomy_resection']);
         }
         if (isset($params['intraoperative_organ_injury_occurred'])) {
             $params['intraoperative_organ_injury_occurred'] = implode(',', $params['intraoperative_organ_injury_occurred']);
         }
-        if (isset($params['adjacent_structures_are_infiltrated_directly'])) {
-            $params['adjacent_structures_are_infiltrated_directly'] = implode(',', $params['adjacent_structures_are_infiltrated_directly']);
+        if (isset($params['adverse_reactions_of_perioperative_blood_transfusion'])) {
+            $params['adverse_reactions_of_perioperative_blood_transfusion'] = implode(',', $params['adverse_reactions_of_perioperative_blood_transfusion']);
         }
         if (isset($params['perioperative_complications'])) {
             $params['perioperative_complications'] = implode(',', $params['perioperative_complications']);
@@ -96,18 +97,6 @@ class StomachCasController extends Controller
 
         if (isset($params['laparoscopic_exploration_time']) && $params['laparoscopic_exploration_time']) {
             $params['laparoscopic_exploration_time'] = strtotime($params['laparoscopic_exploration_time']);
-        }
-        if (isset($params['first_period_chemotherapy_time']) && $params['first_period_chemotherapy_time']) {
-            $params['first_period_chemotherapy_time'] = strtotime($params['first_period_chemotherapy_time']);
-        }
-        if (isset($params['second_period_chemotherapy_time']) && $params['second_period_chemotherapy_time']) {
-            $params['second_period_chemotherapy_time'] = strtotime($params['second_period_chemotherapy_time']);
-        }
-        if (isset($params['third_period_chemotherapy_time']) && $params['third_period_chemotherapy_time']) {
-            $params['third_period_chemotherapy_time'] = strtotime($params['third_period_chemotherapy_time']);
-        }
-        if (isset($params['fourth_period_chemotherapy_time']) && $params['fourth_period_chemotherapy_time']) {
-            $params['fourth_period_chemotherapy_time'] = strtotime($params['fourth_period_chemotherapy_time']);
         }
         if (isset($params['admission_time']) && $params['admission_time']) {
             $params['admission_time'] = strtotime($params['admission_time']);
@@ -156,7 +145,7 @@ class StomachCasController extends Controller
             $params['postoperation_hospital_days'] = ($discharge_time - $operative_time) / 86400;
         }
 
-        StomachCa::create($params);
+        StromalTumor::create($params);
 
         return response()->json($this->response_data());
     }
@@ -169,9 +158,9 @@ class StomachCasController extends Controller
      */
     public function show($id)
     {
-        $stomach_ca = StomachCa::find($id);
+        $stromal_tumor = StromalTumor::find($id);
 
-        $img_ids = explode(',', $stomach_ca['img_id']);
+        $img_ids = explode(',', $stromal_tumor['img_id']);
         $img_arr = [];
         foreach ($img_ids as $key => $value) {
             $file = UploadFile::find($value);
@@ -181,15 +170,10 @@ class StomachCasController extends Controller
                     'url' => Storage::disk('public')->url($file['file_url'])
                 ];
             }
-            // $img_url = Storage::disk('public')->url($img['file_url']);
-            // $img_arr[] = [
-            //     'name' => $img_url,
-            //     'url' => $img_url,
-            // ];
         }
-        $stomach_ca['img'] = $img_arr;
+        $stromal_tumor['img'] = $img_arr;
 
-        $video = UploadFile::find($stomach_ca['video_id']);
+        $video = UploadFile::find($stromal_tumor['video_id']);
         $video_arr = [];
         if ($video) {
             $video_url = Storage::disk('public')->url($video['file_url']);
@@ -199,9 +183,9 @@ class StomachCasController extends Controller
             ];
         }
 
-        $stomach_ca['video'] = $video_arr;
+        $stromal_tumor['video'] = $video_arr;
 
-        $attachment_ids = explode(',', $stomach_ca['attachment_id']);
+        $attachment_ids = explode(',', $stromal_tumor['attachment_id']);
         $attachment = [];
         foreach ($attachment_ids as $key => $value) {
             $file = UploadFile::find($value);
@@ -212,17 +196,17 @@ class StomachCasController extends Controller
                 ];
             }
         }
-        $stomach_ca['attachment'] = $attachment;   
+        $stromal_tumor['attachment'] = $attachment;   
 
-        $stomach_ca['main_symptoms'] = explode(',', $stomach_ca['main_symptoms']);
-        $stomach_ca['main_signs'] = explode(',', $stomach_ca['main_signs']);   
-        $stomach_ca['preoperative_complications'] = explode(',', $stomach_ca['preoperative_complications']);     
-        $stomach_ca['simultaneous_organoectomy_resection'] = explode(',', $stomach_ca['simultaneous_organoectomy_resection']);
-        $stomach_ca['intraoperative_organ_injury_occurred'] = explode(',', $stomach_ca['intraoperative_organ_injury_occurred']);
-        $stomach_ca['adjacent_structures_are_infiltrated_directly'] = explode(',', $stomach_ca['adjacent_structures_are_infiltrated_directly']);
-        $stomach_ca['perioperative_complications'] = explode(',', $stomach_ca['perioperative_complications']);
+        $stromal_tumor['main_symptoms'] = explode(',', $stromal_tumor['main_symptoms']);
+        $stromal_tumor['main_signs'] = explode(',', $stromal_tumor['main_signs']);  
+        $stromal_tumor['preoperative_complications_0'] = explode(',', $stromal_tumor['preoperative_complications_0']); 
+        $stromal_tumor['preoperative_complications'] = explode(',', $stromal_tumor['preoperative_complications']);     
+        $stromal_tumor['intraoperative_organ_injury_occurred'] = explode(',', $stromal_tumor['intraoperative_organ_injury_occurred']);
+        $stromal_tumor['adverse_reactions_of_perioperative_blood_transfusion'] = explode(',', $stromal_tumor['adverse_reactions_of_perioperative_blood_transfusion']);
+        $stromal_tumor['perioperative_complications'] = explode(',', $stromal_tumor['perioperative_complications']);
 
-        return response()->json($this->response_data($stomach_ca));
+        return response()->json($this->response_data($stromal_tumor));
     }
 
     /**
@@ -251,17 +235,17 @@ class StomachCasController extends Controller
         if (isset($params['main_signs'])) {
             $params['main_signs'] = implode(',', $params['main_signs']);   
         }
+        if (isset($params['preoperative_complications_0'])) {
+            $params['preoperative_complications_0'] = implode(',', $params['preoperative_complications_0']);
+        }
         if (isset($params['preoperative_complications'])) {
             $params['preoperative_complications'] = implode(',', $params['preoperative_complications']);
-        }
-        if (isset($params['simultaneous_organoectomy_resection'])) {
-            $params['simultaneous_organoectomy_resection'] = implode(',', $params['simultaneous_organoectomy_resection']);
         }
         if (isset($params['intraoperative_organ_injury_occurred'])) {
             $params['intraoperative_organ_injury_occurred'] = implode(',', $params['intraoperative_organ_injury_occurred']);
         }
-        if (isset($params['adjacent_structures_are_infiltrated_directly'])) {
-            $params['adjacent_structures_are_infiltrated_directly'] = implode(',', $params['adjacent_structures_are_infiltrated_directly']);
+        if (isset($params['adverse_reactions_of_perioperative_blood_transfusion'])) {
+            $params['adverse_reactions_of_perioperative_blood_transfusion'] = implode(',', $params['adverse_reactions_of_perioperative_blood_transfusion']);
         }
         if (isset($params['perioperative_complications'])) {
             $params['perioperative_complications'] = implode(',', $params['perioperative_complications']);
@@ -269,18 +253,6 @@ class StomachCasController extends Controller
 
         if (isset($params['laparoscopic_exploration_time']) && $params['laparoscopic_exploration_time']) {
             $params['laparoscopic_exploration_time'] = strtotime($params['laparoscopic_exploration_time']);
-        }
-        if (isset($params['first_period_chemotherapy_time']) && $params['first_period_chemotherapy_time']) {
-            $params['first_period_chemotherapy_time'] = strtotime($params['first_period_chemotherapy_time']);
-        }
-        if (isset($params['second_period_chemotherapy_time']) && $params['second_period_chemotherapy_time']) {
-            $params['second_period_chemotherapy_time'] = strtotime($params['second_period_chemotherapy_time']);
-        }
-        if (isset($params['third_period_chemotherapy_time']) && $params['third_period_chemotherapy_time']) {
-            $params['third_period_chemotherapy_time'] = strtotime($params['third_period_chemotherapy_time']);
-        }
-        if (isset($params['fourth_period_chemotherapy_time']) && $params['fourth_period_chemotherapy_time']) {
-            $params['fourth_period_chemotherapy_time'] = strtotime($params['fourth_period_chemotherapy_time']);
         }
         if (isset($params['admission_time']) && $params['admission_time']) {
             $params['admission_time'] = strtotime($params['admission_time']);
@@ -321,6 +293,14 @@ class StomachCasController extends Controller
             $params['total_hospital_days'] = ($discharge_time - $admission_time) / 86400;
         }
 
+        // 总住院天数
+        if (isset($params['admission_time']) && isset($params['discharge_time'])) {
+            $admission_time = strtotime(date('Y-m-d', $params['admission_time']));
+            $discharge_time = strtotime(date('Y-m-d', $params['discharge_time']));
+
+            $params['total_hospital_days'] = ($discharge_time - $admission_time) / 86400;
+        }
+
         // 术后住院天数
         if (isset($params['operative_time']) && isset($params['discharge_time'])) {
             $operative_time = strtotime(date('Y-m-d', $params['operative_time']));
@@ -329,7 +309,7 @@ class StomachCasController extends Controller
             $params['postoperation_hospital_days'] = ($discharge_time - $operative_time) / 86400;
         }
 
-        StomachCa::updateOrCreate(['id' => $id], $params);
+        StromalTumor::updateOrCreate(['id' => $id], $params);
 
         return response()->json($this->response_data());
     }
