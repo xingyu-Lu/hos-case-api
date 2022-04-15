@@ -33,13 +33,13 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($params['stromal_tumor_id']);
+        $stomach_ca = StomachCa::where($where)->find($params['stomach_ca_id']);
 
         if (!$stomach_ca) {
             throw new BaseException(['msg' => '非法操作']);
         }
 
-        $stomach_follow_up = StomachFollowUp::where('stromal_tumor_id', $params['stromal_tumor_id'])->orderBy('id', 'desc')->paginate(20);
+        $stomach_follow_up = StomachFollowUp::where('stomach_ca_id', $params['stomach_ca_id'])->orderBy('id', 'desc')->paginate(20);
 
         return response()->json($this->response_page($stomach_follow_up));
     }
@@ -66,7 +66,7 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($params['stromal_tumor_id']);
+        $stomach_ca = StomachCa::where($where)->find($params['stomach_ca_id']);
 
         if (!$stomach_ca) {
             throw new BaseException(['msg' => '非法操作']);
@@ -135,7 +135,7 @@ class StomachFollowUpsController extends Controller
 
         $params = $request->all();
 
-        $stomach_ca = StomachCa::where($where)->find($stomach_follow_up['stromal_tumor_id']);
+        $stomach_ca = StomachCa::where($where)->find($stomach_follow_up['stomach_ca_id']);
 
         if (!$stomach_ca) {
             throw new BaseException(['msg' => '非法操作']);
