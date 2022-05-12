@@ -16,6 +16,18 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
+                'content' => '接口联调等等',
+                'timestamp' => '2022-05-12',
+            ],
+            [
+                'content' => '列表页面，新增、修改页面部分等等',
+                'timestamp' => '2022-05-11',
+            ],
+            [
+                'content' => '完善后端接口，前端页面开始等等',
+                'timestamp' => '2022-05-10',
+            ],
+            [
                 'content' => '直肠癌建表，部分后端接口等等',
                 'timestamp' => '2022-05-09',
             ],
