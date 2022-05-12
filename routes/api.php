@@ -64,6 +64,11 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         // 间质瘤
         Route::apiResource('StromalTumors', 'StromalTumorsController');
         // 间质瘤随访
-        Route::apiResource('StromalTumorFollowUps', 'StromalTumorFollowUpsController');        
+        Route::apiResource('StromalTumorFollowUps', 'StromalTumorFollowUpsController'); 
+
+        // 直肠癌
+        Route::apiResource('ColorectalCancers', 'ColorectalCancersController');
+        // 直肠癌随访
+        Route::apiResource('ColorectalCancerFollowUps', 'ColorectalCancerFollowUpsController'); 
     });
 });

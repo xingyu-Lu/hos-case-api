@@ -16,6 +16,18 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
+                'content' => '直肠癌建表，部分后端接口等等',
+                'timestamp' => '2022-05-09',
+            ],
+            [
+                'content' => '直肠癌建表等等',
+                'timestamp' => '2022-05-08',
+            ],
+            [
+                'content' => '直肠癌开始建表等等',
+                'timestamp' => '2022-05-07',
+            ],
+            [
                 'content' => '胃ca加搜索，间质瘤等等',
                 'timestamp' => '2022-04-14',
             ],
