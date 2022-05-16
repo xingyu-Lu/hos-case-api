@@ -70,5 +70,10 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         Route::apiResource('ColorectalCancers', 'ColorectalCancersController');
         // 直肠癌随访
         Route::apiResource('ColorectalCancerFollowUps', 'ColorectalCancerFollowUpsController'); 
+
+        // 减重
+        Route::apiResource('WeightLosss', 'WeightLosssController');
+        // 减重随访
+        Route::apiResource('WeightLossFollowUps', 'WeightLossFollowUpsController'); 
     });
 });
