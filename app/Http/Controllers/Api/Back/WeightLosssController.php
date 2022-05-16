@@ -162,9 +162,9 @@ class WeightLosssController extends Controller
         $weight_loss['attachment'] = $attachment;  
 
         // 多选
-        $stromal_tumor['perioperative_complications'] = explode(',', $weight_loss['perioperative_complications']); 
-        $stromal_tumor['nonoperative_complication'] = explode(',', $weight_loss['nonoperative_complication']); 
-        $stromal_tumor['outcome'] = explode(',', $weight_loss['outcome']); 
+        $weight_loss['perioperative_complications'] = explode(',', $weight_loss['perioperative_complications']); 
+        $weight_loss['nonoperative_complication'] = explode(',', $weight_loss['nonoperative_complication']); 
+        $weight_loss['outcome'] = explode(',', $weight_loss['outcome']); 
 
         return response()->json($this->response_data($weight_loss));
     }
