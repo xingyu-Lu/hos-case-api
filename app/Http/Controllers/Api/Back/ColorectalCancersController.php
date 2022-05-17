@@ -156,7 +156,7 @@ class ColorectalCancersController extends Controller
         $colorectal_cancer['attachment'] = $attachment;  
 
         // 多选
-        $stromal_tumor['postoperative_complication_specific'] = explode(',', $colorectal_cancer['postoperative_complication_specific']); 
+        $colorectal_cancer['postoperative_complication_specific'] = explode(',', $colorectal_cancer['postoperative_complication_specific']); 
 
         return response()->json($this->response_data($colorectal_cancer));
     }
