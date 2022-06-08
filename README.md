@@ -63,8 +63,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## 1.执行我的sql表
-## 2.执行创建权限表 php artisan migrate --path=/database/migrations/2022_03_28_092413_create_permission_tables.php
-## 3.执行创建root角色并赋给超级管理员 php artisan db:seed --class=InitRolesPermissionsAdminsSeeder
-## 4.storage 开777权限：chmod -R 777 storage/
-## 5.创建软链：php artisan storage:link
+## 1.创建.env文件
+## 2.composer install
+## 3.执行我的sql表
+## 4.执行创建权限表 php artisan migrate --path=/database/migrations/2022_03_28_092413_create_permission_tables.php
+## 5.执行创建root角色并赋给超级管理员 php artisan db:seed --class=InitRolesPermissionsAdminsSeeder
+## 6.storage 开777权限：chmod -R 777 storage/
+## 7.创建软链：php artisan storage:link
+## 8./api/back/permissions/saveApiPermission 接口写入权限

@@ -20,7 +20,7 @@ class RolesController extends Controller
     {
         $roles = Role::where('name', '<>', 'root')->get()->toArray();
 
-        return response()->json($this->response_data());
+        return response()->json($this->response_data($roles));
     }
 
     /**
