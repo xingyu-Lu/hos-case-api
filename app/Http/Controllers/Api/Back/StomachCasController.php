@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Back;
 
+use App\Exceptions\BaseException;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Role;
@@ -23,15 +24,15 @@ class StomachCasController extends Controller
 
         $current_user = auth('api')->user();
 
-        $root = $current_user->hasRole(Role::ROOT, app(Admin::class)->guardName());
+        // $root = $current_user->hasRole(Role::ROOT, app(Admin::class)->guardName());
         
         $where = [];
 
-        if (!$root) {
-            $where[] = [
-                'admin_id', '=', $current_user['id']
-            ];
-        }
+        // if (!$root) {
+        //     $where[] = [
+        //         'admin_id', '=', $current_user['id']
+        //     ];
+        // }
 
         if (isset($params['name'])) {
             $where[] = ['name', 'like', '%' . $params['name'] . '%'];
@@ -234,6 +235,14 @@ class StomachCasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $current_user = auth('api')->user();
+
+        $stomach_ca = StomachCa::find($id);
+
+        if ($stomach_ca['admin_id'] != $current_user['id']) {
+            throw new BaseException(['msg' => '非病例创建人，不能修改']);
+        }
+
         $params = $request->all();
 
         $params['img_id'] = $params['img'] ?? '';
