@@ -46,11 +46,7 @@ class AdminsController extends Controller
     {
         $params = $request->all();
 
-        if ($params['new_password']) {
-            $params['password'] = md5($params['new_password']);
-        } else {
-            $params['password'] = md5($params['password']);
-        }
+        $params['password'] = md5($params['password']);
 
         unset($params['new_password']);
 
