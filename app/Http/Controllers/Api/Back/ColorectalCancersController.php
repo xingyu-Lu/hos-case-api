@@ -44,7 +44,18 @@ class ColorectalCancersController extends Controller
             $where[] = ['hospital_number', '=' . $params['hospital_number']];
         }
 
-        $colorectal_cancer = ColorectalCancer::where($where)->orderBy('id', 'desc')->paginate(20);
+        $colorectal_cancer = ColorectalCancer::where($where)->orderBy('is_follow', 'desc')->orderBy('follow_time', 'asc')->orderBy('id', 'desc')->paginate(20);
+
+        foreach ($colorectal_cancer as $key => $value) {
+            $today_time = strtotime(date('Y-m-d'));
+            $value_time = strtotime(date('Y-m-d', strtotime($value['follow_time'])));
+
+            if ($value['is_follow']) {
+                $value['follow_day_num'] = ($value_time-$today_time)/86400;
+            } else {
+                $value['follow_day_num'] = '';
+            }
+        }
 
         return response()->json($this->response_page($colorectal_cancer));
     }
@@ -80,6 +91,9 @@ class ColorectalCancersController extends Controller
         }
         if (isset($params['discharge_time']) && $params['discharge_time']) {
             $params['discharge_time'] = strtotime($params['discharge_time']);
+        }
+        if (isset($params['follow_time']) && $params['follow_time']) {
+            $params['follow_time'] = strtotime($params['follow_time']);
         }
 
         // 总住院天数
@@ -199,6 +213,9 @@ class ColorectalCancersController extends Controller
         if (isset($params['discharge_time']) && $params['discharge_time']) {
             $params['discharge_time'] = strtotime($params['discharge_time']);
         }
+        if (isset($params['follow_time']) && $params['follow_time']) {
+            $params['follow_time'] = strtotime($params['follow_time']);
+        }
 
         // 总住院天数
         if (isset($params['admission_time']) && isset($params['discharge_time'])) {
@@ -235,5 +252,19 @@ class ColorectalCancersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // 当天待随访人数
+    public function followDayNum()
+    {
+        $res_data = [];
+
+        $num = ColorectalCancer::where('is_follow', 1)->where('follow_time', strtotime(date('Y-m-d')))->count();
+
+        $res_data = [
+            'follow_day_num' => $num,
+        ];
+
+        return response()->json($this->response_data($res_data));
     }
 }

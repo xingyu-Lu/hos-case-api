@@ -398,6 +398,10 @@ CREATE TABLE `syy_stomach_cas` (
   `inputting_medical_records` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息录入者',
   `is_the_record_entry_complete` text DEFAULT NULL COMMENT '病历录入是否完整',
   `medical_records_information_checker` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息核查者',
+  # 随访
+  `is_follow` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否随访 0：否 1：是',
+  `follow_time` int(11) NOT NULL DEFAULT 0 COMMENT '随访日期时间',
+  `follow_content` text DEFAULT NULL COMMENT '随访内容',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -414,7 +418,7 @@ CREATE TABLE `syy_stomach_follow_ups` (
   `long_term_complications_and_management_methods` text DEFAULT NULL COMMENT '远期并发症及处理方式',
   `whether_new_hair_gallbladder_stone` tinyint(3) NOT NULL DEFAULT 0 COMMENT '是否新发胆囊结石（0=否；1=是，2=既往合并胆囊结石）',
   `gallstone_discovery_time` int(11) NOT NULL DEFAULT 0 COMMENT '胆囊结石发现时间（年-月-日）',
-  `treatment_of_gallstones` tinyint(3) NOT NULL DEFAULT 0 COMMENT '胆囊结石处理方式（1=保守，2=手术）',
+  `treatment_of_gallstones` tinyint(3) .NOT NULL DEFAULT 0 COMMENT '胆囊结石处理方式（1=保守，2=手术）',
   `local_recurrence_time` int(11) NOT NULL DEFAULT 0 COMMENT '局部复发时间',
   `distant_transfer_time` int(11) NOT NULL DEFAULT 0 COMMENT '远处转移时间',
   `distant_metastatic_site` varchar(300) NOT NULL DEFAULT '' COMMENT '远处转移部位（非肿瘤死亡原因）',
@@ -602,6 +606,10 @@ CREATE TABLE `syy_stromal_tumors` (
   `inputting_medical_records` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息录入者',
   `is_the_record_entry_complete` text DEFAULT NULL COMMENT '病历录入是否完整',
   `medical_records_information_checker` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息核查者',
+  # 随访
+  `is_follow` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否随访 0：否 1：是',
+  `follow_time` int(11) NOT NULL DEFAULT 0 COMMENT '随访日期时间',
+  `follow_content` text DEFAULT NULL COMMENT '随访内容',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -925,6 +933,10 @@ CREATE TABLE `syy_colorectal_cancers` (
   `inputting_medical_records` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息录入者',
   `is_the_record_entry_complete` text DEFAULT NULL COMMENT '病历录入是否完整',
   `medical_records_information_checker` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息核查者',
+  # 随访
+  `is_follow` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否随访 0：否 1：是',
+  `follow_time` int(11) NOT NULL DEFAULT 0 COMMENT '随访日期时间',
+  `follow_content` text DEFAULT NULL COMMENT '随访内容',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -1165,6 +1177,10 @@ CREATE TABLE `syy_weight_loss` (
   `inputting_medical_records` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息录入者',
   `is_the_record_entry_complete` text DEFAULT NULL COMMENT '病历录入是否完整',
   `medical_records_information_checker` varchar(100) NOT NULL DEFAULT '' COMMENT '病历信息核查者',
+  # 随访
+  `is_follow` tinyint(3) NOT NULL DEFAULT '0' COMMENT '是否随访 0：否 1：是',
+  `follow_time` int(11) NOT NULL DEFAULT 0 COMMENT '随访日期时间',
+  `follow_content` text DEFAULT NULL COMMENT '随访内容',
   `created_at` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `updated_at` int(11) NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY (`id`)

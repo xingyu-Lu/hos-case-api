@@ -21,6 +21,7 @@ class WeightLoss extends BaseModel
         'admission_time' => 'datetime:Y-m-d H:i:s',
         'operative_time' => 'datetime:Y-m-d H:i:s',
         'discharge_time' => 'datetime:Y-m-d H:i:s',
+        'follow_time' => 'datetime:Y-m-d H:i:s',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];

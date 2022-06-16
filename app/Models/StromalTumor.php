@@ -29,6 +29,7 @@ class StromalTumor extends BaseModel
         'anal_exhaust_day_time' => 'datetime:Y-m-d H:i:s',
         'start_an_out_of_bed_day_time' => 'datetime:Y-m-d H:i:s',
         'start_a_fluid_day_time' => 'datetime:Y-m-d H:i:s',
+        'follow_time' => 'datetime:Y-m-d H:i:s',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];

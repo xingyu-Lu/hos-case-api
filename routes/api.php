@@ -57,21 +57,25 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         Route::apiResource('caseTypes', 'CaseTypesController');
 
         // 胃ca
+        Route::get('stomachCas/followDayNum', 'StomachCasController@followDayNum')->name('stomachCas.followDayNum');
         Route::apiResource('stomachCas', 'StomachCasController');
         // 胃ca随访
         Route::apiResource('stomachFollowUps', 'StomachFollowUpsController');        
 
         // 间质瘤
+        Route::get('StromalTumors/followDayNum', 'StromalTumorsController@followDayNum')->name('StromalTumors.followDayNum');
         Route::apiResource('StromalTumors', 'StromalTumorsController');
         // 间质瘤随访
         Route::apiResource('StromalTumorFollowUps', 'StromalTumorFollowUpsController'); 
 
         // 直肠癌
+        Route::get('ColorectalCancers/followDayNum', 'ColorectalCancersController@followDayNum')->name('ColorectalCancers.followDayNum');
         Route::apiResource('ColorectalCancers', 'ColorectalCancersController');
         // 直肠癌随访
         Route::apiResource('ColorectalCancerFollowUps', 'ColorectalCancerFollowUpsController'); 
 
         // 减重
+        Route::get('WeightLosss/followDayNum', 'WeightLosssController@followDayNum')->name('WeightLosss.followDayNum');
         Route::apiResource('WeightLosss', 'WeightLosssController');
         // 减重随访
         Route::apiResource('WeightLossFollowUps', 'WeightLossFollowUpsController'); 
