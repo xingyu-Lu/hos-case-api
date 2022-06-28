@@ -16,6 +16,18 @@ class UpdateLogsController extends Controller
     {
         $data = [
             [
+                'content' => '后端接口编写',
+                'timestamp' => '2022-06-28',
+            ],
+            [
+                'content' => '设计统计功能',
+                'timestamp' => '2022-06-27',
+            ],
+            [
+                'content' => '简单重构改版',
+                'timestamp' => '2022-06-24',
+            ],
+            [
                 'content' => '测试bug解决接口',
                 'timestamp' => '2022-05-18',
             ],
