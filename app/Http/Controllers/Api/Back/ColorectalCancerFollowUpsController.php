@@ -76,6 +76,7 @@ class ColorectalCancerFollowUpsController extends Controller
             $params['dead_time'] = strtotime($params['dead_time']);
         }
         if (isset($params['followed_up_after_operation_date_time']) && $params['followed_up_after_operation_date_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['followed_up_after_operation_date_time'])));
             $params['followed_up_after_operation_date_time'] = strtotime($params['followed_up_after_operation_date_time']);
         }
         if (isset($params['gallstone_discovery_time']) && $params['gallstone_discovery_time']) {
@@ -145,6 +146,7 @@ class ColorectalCancerFollowUpsController extends Controller
             $params['dead_time'] = strtotime($params['dead_time']);
         }
         if (isset($params['followed_up_after_operation_date_time']) && $params['followed_up_after_operation_date_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['followed_up_after_operation_date_time'])));
             $params['followed_up_after_operation_date_time'] = strtotime($params['followed_up_after_operation_date_time']);
         }
         if (isset($params['gallstone_discovery_time']) && $params['gallstone_discovery_time']) {

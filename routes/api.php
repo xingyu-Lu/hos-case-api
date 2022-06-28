@@ -49,6 +49,9 @@ Route::namespace('Api\Back')->prefix('back')->group(function () {
         //文件上传
         Route::post('files/upload', 'FilesController@upload')->name('files.upload');
 
+        // dashboard
+        Route::apiResource('dashboards', 'DashboardsController');
+
         // 病例管理
         Route::put('cases/status', 'CasesController@status')->name('cases.status');
         Route::apiResource('cases', 'CasesController');

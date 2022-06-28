@@ -72,20 +72,9 @@ class WeightLossFollowUpsController extends Controller
             throw new BaseException(['msg' => '非法操作']);
         }
 
-        if (isset($params['dead_time']) && $params['dead_time']) {
-            $params['dead_time'] = strtotime($params['dead_time']);
-        }
         if (isset($params['followed_up_after_operation_date_time']) && $params['followed_up_after_operation_date_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['followed_up_after_operation_date_time'])));
             $params['followed_up_after_operation_date_time'] = strtotime($params['followed_up_after_operation_date_time']);
-        }
-        if (isset($params['gallstone_discovery_time']) && $params['gallstone_discovery_time']) {
-            $params['gallstone_discovery_time'] = strtotime($params['gallstone_discovery_time']);
-        }
-        if (isset($params['local_recurrence_time']) && $params['local_recurrence_time']) {
-            $params['local_recurrence_time'] = strtotime($params['local_recurrence_time']);
-        }
-        if (isset($params['distant_transfer_time']) && $params['distant_transfer_time']) {
-            $params['distant_transfer_time'] = strtotime($params['distant_transfer_time']);
         }
 
         WeightLossFollowUp::create($params);
@@ -141,20 +130,9 @@ class WeightLossFollowUpsController extends Controller
             throw new BaseException(['msg' => '非法操作']);
         }
 
-        if (isset($params['dead_time']) && $params['dead_time']) {
-            $params['dead_time'] = strtotime($params['dead_time']);
-        }
         if (isset($params['followed_up_after_operation_date_time']) && $params['followed_up_after_operation_date_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['followed_up_after_operation_date_time'])));
             $params['followed_up_after_operation_date_time'] = strtotime($params['followed_up_after_operation_date_time']);
-        }
-        if (isset($params['gallstone_discovery_time']) && $params['gallstone_discovery_time']) {
-            $params['gallstone_discovery_time'] = strtotime($params['gallstone_discovery_time']);
-        }
-        if (isset($params['local_recurrence_time']) && $params['local_recurrence_time']) {
-            $params['local_recurrence_time'] = strtotime($params['local_recurrence_time']);
-        }
-        if (isset($params['distant_transfer_time']) && $params['distant_transfer_time']) {
-            $params['distant_transfer_time'] = strtotime($params['distant_transfer_time']);
         }
 
         WeightLossFollowUp::updateOrCreate(['id' => $id], $params);

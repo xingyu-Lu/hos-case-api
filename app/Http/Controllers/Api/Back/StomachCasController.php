@@ -122,6 +122,7 @@ class StomachCasController extends Controller
             $params['fourth_period_chemotherapy_time'] = strtotime($params['fourth_period_chemotherapy_time']);
         }
         if (isset($params['admission_time']) && $params['admission_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['admission_time'])));
             $params['admission_time'] = strtotime($params['admission_time']);
         }
         if (isset($params['operative_time']) && $params['operative_time']) {
@@ -306,6 +307,7 @@ class StomachCasController extends Controller
             $params['fourth_period_chemotherapy_time'] = strtotime($params['fourth_period_chemotherapy_time']);
         }
         if (isset($params['admission_time']) && $params['admission_time']) {
+            $params['date'] = strtotime(date('Y-m', strtotime($params['admission_time'])));
             $params['admission_time'] = strtotime($params['admission_time']);
         }
         if (isset($params['operative_time']) && $params['operative_time']) {
@@ -376,7 +378,7 @@ class StomachCasController extends Controller
     {
         $res_data = [];
 
-        $num = StomachCa::where('is_follow', 1)->where('follow_time', strtotime(date('Y-m-d')))->count();
+        $num = StomachCa::where('is_follow', 1)->where('follow_time', '<=', strtotime(date('Y-m-d')))->count();
 
         $res_data = [
             'follow_day_num' => $num,
