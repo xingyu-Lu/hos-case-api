@@ -73,7 +73,7 @@ class MenusController extends Controller
     {
         $current_user = auth()->user();
 
-        $menus_id = DB::table('role_has_menus')->select('menu_id')->whereIn('role_id', $roles_id)->orderBy('sort', 'asc')->get()->toArray();
+        $menus_id = DB::table('role_has_menus')->select('menu_id')->whereIn('role_id', $roles_id)->get()->toArray();
 
         $menus_id = array_column($menus_id, 'menu_id');
 
@@ -81,7 +81,7 @@ class MenusController extends Controller
 
         $menus_id = array_merge($menus_id, $pids);
         
-        $menus = Menu::whereIn('id', $menus_id)->where('is_enabled', Menu::IS_ENABLED_1)->get()->toArray();
+        $menus = Menu::whereIn('id', $menus_id)->where('is_enabled', Menu::IS_ENABLED_1)->orderBy('sort', 'asc')->get()->toArray();
 
         $menus = $this->getMenus($menus);
 
